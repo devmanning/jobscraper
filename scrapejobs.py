@@ -1,3 +1,8 @@
+""" This module is written to scrape job postong for Aircraft maintenance jobs posted in Indeed Canada.
+    The scraped jobs id added to a pandas data frame and then loaded to an database using ETL scripts.
+
+"""
+
 import requests
 
 import bs4
