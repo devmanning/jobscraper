@@ -13,11 +13,12 @@ import pandas as pd
 
 import time
 
+
 # Prepare to get the content of the website
 
 pagenum=0
 
-url="https://ca.indeed.com/jobs?q=Aircraft+Maintenance+Engineer&l=Canada&start="+str(pagenum)
+url="https://ca.indeed.com/jobs?q=Aircraft+Maintenance&l=Canada&fromage=last&start="+str(pagenum)
 
 #conducting a request of the stated URL above:
 page = requests.get(url)    # page object stores the unparsed raw HTML document as a long string
@@ -85,7 +86,6 @@ def harvestpages(block):
     dates = soup.find('div', id='searchCountPages').text
     page = [int (dt) for dt in dates.split() if dt.isdigit()]
     pagenumber=page[1]//12
-    print(pagenumber)
     return(pagenumber)
         
     
@@ -95,6 +95,7 @@ def harvestpages(block):
 
 # Defining the dataframe & initializing it
 columns = ['job_title', 'company_name', 'location']
+
 jobs_df = pd.DataFrame(columns = columns)
 
 
@@ -103,7 +104,7 @@ jobs_df = pd.DataFrame(columns = columns)
 
 pagenumber = harvestpages(soup)
 num=0
-
+    
 while pagenum < pagenumber :
     time.sleep(1)  #ensuring at least 1 second between  grabs
 
@@ -117,10 +118,14 @@ while pagenum < pagenumber :
         
     pagenum+=1
     
-    url = "https://ca.indeed.com/jobs?q=Aircraft+Maintenance+Engineer&l=Canada&start="+str(pagenum)
+    url = "https://ca.indeed.com/jobs?q=Aircraft+Maintenance&l=Canada&fromage=1&start="+str(pagenum)
           
     
 #appending list of job post info to dataframe at index num
 
-print(jobs_df)
-#harvestpages(div)
+
+jobs_df
+#print(jobs_df)
+
+
+
